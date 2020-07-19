@@ -153,7 +153,7 @@ router.put("/:userId/:projectId/:listI/:itemI", isLoggedIn, (req, res) => {
     .catch((err) => {});
 });
 
-router.post("/:userId/:projectId/:listI/:itemI/del", isLoggedIn, (req, res) => {
+router.put("/:userId/:projectId/:listI/:itemI/del", isLoggedIn, (req, res) => {
   let newList = req.body;
   Project.findById(req.params.projectId)
     .then((project) => {
