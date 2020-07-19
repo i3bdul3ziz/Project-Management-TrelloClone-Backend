@@ -153,18 +153,22 @@ router.put("/:userId/:projectId/:listI/:itemI", isLoggedIn, (req, res) => {
     .catch((err) => {});
 });
 
-router.put("/:userId/:projectId/:listI/:itemI/del", isLoggedIn, (req, res) => {
-  let newList = req.body;
-  Project.findById(req.params.projectId)
-    .then((project) => {
-      project.cards = newList;
-      project.save();
-      res.json({ message: "تمت إزالة المهمة بنجاح" }).status(200);
-    })
-    .catch((err) => {
-      res.json({ message: "حدث خطأ, لا يمكن إزالة المهمة" }).status(400);
-    });
-});
+router.put(
+  "/:userId/:projectId/:listI/:itemI/task/del",
+  isLoggedIn,
+  (req, res) => {
+    let newList = req.body;
+    Project.findById(req.params.projectId)
+      .then((project) => {
+        project.cards = newList;
+        project.save();
+        res.json({ message: "تمت إزالة المهمة بنجاح" }).status(200);
+      })
+      .catch((err) => {
+        res.json({ message: "حدث خطأ, لا يمكن إزالة المهمة" }).status(400);
+      });
+  }
+);
 
 router.put(
   "/:userId/:projectId/:listI/:newGrpI/moveall",
