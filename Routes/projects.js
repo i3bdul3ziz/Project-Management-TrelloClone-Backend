@@ -154,9 +154,10 @@ router.put("/:userId/:projectId/:listI/:itemI", isLoggedIn, (req, res) => {
 });
 
 router.put("/:userId/:projectId/:listI/:itemI/del", isLoggedIn, (req, res) => {
+  let newList = req.body;
   Project.findById(req.params.projectId)
     .then((project) => {
-      project.cards[req.params.listI].items.splice(req.params.itemI, 1);
+      project.cards = newList;
       project.save();
       res.json({ message: "تمت إزالة المهمة بنجاح" }).status(200);
     })
